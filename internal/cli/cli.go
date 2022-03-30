@@ -27,13 +27,13 @@ func InitFlags() (string, string, string, error) {
 	}
 	filename = flag.Args()[0]
 
-	if *flags.strings[0] == ""{
+	if *flags.strings[0] == "" {
 		newFilename = filename
-	} else{
+	} else {
 		newFilename = *flags.strings[0]
 	}
-	
-	if  *flags.strings[1] == ""{
+
+	if *flags.strings[1] == "" {
 		config = "config.yml"
 	} else {
 		config = *flags.strings[1]
@@ -41,4 +41,3 @@ func InitFlags() (string, string, string, error) {
 
 	return filename, newFilename, config, nil
 }
-
