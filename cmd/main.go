@@ -5,6 +5,7 @@ import (
 
 	"github.com/MukhortovDenis/gopostcss/internal/cli"
 	parsing "github.com/MukhortovDenis/gopostcss/internal/parser"
+	"github.com/MukhortovDenis/gopostcss/internal/plugins"
 )
 
 func main() {
@@ -20,6 +21,9 @@ func run() error {
 	}
 	ast, err := parsing.Parse(filename)
 	if err != nil {
+		log.Fatal(err)
+	}
+	if err := plugins.GetPlugins(ast); err != nil {
 		log.Fatal(err)
 	}
 	parsing.Create(newFilename, ast)
