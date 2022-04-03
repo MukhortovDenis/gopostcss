@@ -2,9 +2,9 @@ package plugins
 
 import (
 	"errors"
+	"fmt"
 	"path/filepath"
 	"plugin"
-	"strings"
 
 	parse "github.com/MukhortovDenis/gopostcss_parser"
 )
@@ -13,34 +13,33 @@ type TODO interface {
 	Run(*parse.AST) error
 }
 
-
-
 func GetPlugins(ast *parse.AST) error {
-	all_plugins, err := filepath.Glob("plugins/*.so")
+	all_plugins, err := filepath.Glob("./plugins/*.so")
 	if err != nil {
 		return err
 	}
+	if len(all_plugins) == 0 {
+		return errors.New("no plugs")
+	}
 	for i := range all_plugins {
+		fmt.Println(all_plugins[i])
 		plug, err := plugin.Open(all_plugins[i])
 		if err != nil {
 			return err
 		}
-		symTODO, err := plug.Lookup("TODO")
+		fmt.Println(all_plugins[i])
+		symRun, err := plug.Lookup("Run")
 		if err != nil {
 			return err
 		}
-		var todo TODO
-		todo, ok := symTODO.(TODO)
+		run, ok := symRun.(func(ast *parse.AST) error)
 		if !ok {
 			return errors.New("unexpected type from module symbol")
 		}
-		todo.Run(ast)
+		if err = run(ast); err != nil {
+			return err
+		}
 
 	}
 	return nil
-}
-
-func getNamePlug(name string) string {
-	slice := strings.Split(name, "/")
-	return slice[len(slice)-1]
 }
