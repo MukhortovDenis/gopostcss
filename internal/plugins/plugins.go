@@ -2,7 +2,6 @@ package plugins
 
 import (
 	"errors"
-	"fmt"
 	"path/filepath"
 	"plugin"
 
@@ -22,12 +21,10 @@ func GetPlugins(ast *parse.AST) error {
 		return errors.New("no plugs")
 	}
 	for i := range all_plugins {
-		fmt.Println(all_plugins[i])
 		plug, err := plugin.Open(all_plugins[i])
 		if err != nil {
 			return err
 		}
-		fmt.Println(all_plugins[i])
 		symRun, err := plug.Lookup("Run")
 		if err != nil {
 			return err
