@@ -14,12 +14,3 @@ func Test_GetPlugins(t *testing.T) {
 		}
 	})
 }
-
-// func Test_getNamePlug(t *testing.T){
-// 	t.Run("Проверка получения имени плагина", func(t *testing.T) {
-// 		name := getNamePlug("https://github.com/MukhortovDenis/gopostcss_parser")
-// 		if name != "gopostcss_parser"{
-// 			t.Errorf("smthg gone wrong: %v", name)
-// 		}
-// 	})
-// }
