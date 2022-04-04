@@ -15,6 +15,7 @@ func getFlags() []*string {
 	return []*string{nf, c}
 }
 
+// InitFlags is func where creates flags for cli
 func InitFlags() (string, string, string, error) {
 	flags := new(Flags)
 	flags.strings = getFlags()

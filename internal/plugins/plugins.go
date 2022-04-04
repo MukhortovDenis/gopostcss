@@ -8,10 +8,12 @@ import (
 	parse "github.com/MukhortovDenis/gopostcss_parser"
 )
 
+// TODO is interface for using AST
 type TODO interface {
 	Run(*parse.AST) error
 }
 
+// GetPlugins is func where plugins work with AST
 func GetPlugins(ast *parse.AST) error {
 	all_plugins, err := filepath.Glob("./plugins/*.so")
 	if err != nil {
