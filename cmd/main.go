@@ -15,7 +15,7 @@ func main() {
 }
 
 func run() error {
-	filename, newFilename, _, err := cli.InitFlags()
+	filename, newFilename, err := cli.InitFlags()
 	if err != nil {
 		log.Fatal(err)
 	}

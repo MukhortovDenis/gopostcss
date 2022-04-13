@@ -16,15 +16,14 @@ func getFlags() []*string {
 }
 
 // InitFlags is func where creates flags for cli
-func InitFlags() (string, string, string, error) {
+func InitFlags() (string, string, error) {
 	flags := new(Flags)
 	flags.strings = getFlags()
 	flag.Parse()
 	var filename string
 	var newFilename string
-	var config string
 	if len(flag.Args()) == 0 {
-		return "", "", "", errors.New("undefined filename")
+		return "", "", errors.New("undefined filename")
 	}
 	filename = flag.Args()[0]
 
@@ -34,11 +33,5 @@ func InitFlags() (string, string, string, error) {
 		newFilename = *flags.strings[0]
 	}
 
-	if *flags.strings[1] == "" {
-		config = "config.yml"
-	} else {
-		config = *flags.strings[1]
-	}
-
-	return filename, newFilename, config, nil
+	return filename, newFilename, nil
 }
