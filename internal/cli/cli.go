@@ -11,8 +11,7 @@ type Flags struct {
 
 func getFlags() []*string {
 	nf := flag.String("nf", "", "\"new-filename\" полное имя нового файла, которое хотите получить, стандартное имя `new_YOURFILENAME`")
-	c := flag.String("c", "", "\"config\" полное имя конфигурационного файла, которое хотите получить, стандартное имя `config.yml`")
-	return []*string{nf, c}
+	return []*string{nf}
 }
 
 // InitFlags is func where creates flags for cli
